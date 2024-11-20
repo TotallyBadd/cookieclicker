@@ -1,0 +1,2 @@
+# cookieclicker
+Cookie Clicker Global
