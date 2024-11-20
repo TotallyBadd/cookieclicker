@@ -3,18 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Local Cookie Clicker</title>
+    <title>Cookie Clicker</title>
     <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/5473/5473473.png">
     <style>
         body {
             margin: 0;
+            font-family: 'Comic Sans MS', 'Comic Sans', cursive;
             display: flex;
-            flex-direction: column;
             align-items: center;
             justify-content: center;
             height: 100vh;
-            background-color: #fce4d6;
-            font-family: Arial, sans-serif;
+            background: url('https://www.shutterstock.com/image-vector/background-splattered-snack-crumbs-scattering-600nw-2465443731.jpg') no-repeat center center/cover;
+            color: #5d4037;
+        }
+
+        .starter-page, .game-page {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .starter-page.active, .game-page.active {
+            display: flex;
+        }
+
+        .crumbled-button {
+            font-size: 24px;
+            padding: 15px 30px;
+            margin-top: 20px;
+            border: none;
+            background-color: #e0a67a;
+            color: #fff;
+            border-radius: 10px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: transform 0.2s ease;
+        }
+
+        .crumbled-button:active {
+            transform: scale(0.95);
+        }
+
+        .crumbled-info {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
         }
 
         .cookie {
@@ -30,18 +66,32 @@
         .counter {
             font-size: 24px;
             margin-top: 20px;
-            background: #fff;
+            background: rgba(255, 255, 255, 0.9);
             border-radius: 8px;
             padding: 10px 20px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
         }
     </style>
 </head>
 <body>
-    <div class="cookie" id="cookie">🍪</div>
-    <div class="counter" id="counter">Loading cookies...</div>
+    <div class="starter-page active" id="starterPage">
+        <div class="crumbled-info">
+            <h1>🍪 Welcome to Totally_Bad's Cookie Clicker! 🍪</h1>
+            <p>Click the cookie to contribute to your personal cookie count!</p>
+            <p>Cookies are stored locally, so you can reload anytime and keep your progress!</p>
+        </div>
+        <button class="crumbled-button" id="startButton">Start Clicking</button>
+    </div>
+
+    <div class="game-page" id="gamePage">
+        <div class="cookie" id="cookie">🍪</div>
+        <div class="counter" id="counter">Loading cookies...</div>
+    </div>
 
     <script>
+        const starterPage = document.getElementById('starterPage');
+        const gamePage = document.getElementById('gamePage');
+        const startButton = document.getElementById('startButton');
         const cookieElement = document.getElementById('cookie');
         const counterElement = document.getElementById('counter');
 
@@ -50,6 +100,11 @@
         function updateCounter() {
             counterElement.textContent = `Cookies: ${localCookies}`;
         }
+
+        startButton.addEventListener('click', () => {
+            starterPage.classList.remove('active');
+            gamePage.classList.add('active');
+        });
 
         cookieElement.addEventListener('click', () => {
             localCookies++;
