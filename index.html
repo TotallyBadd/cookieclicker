@@ -39,7 +39,12 @@
             box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
             cursor: pointer;
             text-transform: uppercase;
-            transition: transform 0.2s ease;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .crumbled-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0px 8px 12px rgba(0, 0, 0, 0.4);
         }
 
         .crumbled-button:active {
@@ -47,10 +52,16 @@
         }
 
         .crumbled-info {
-            background-color: rgba(255, 255, 255, 0.8);
-            padding: 20px;
-            border-radius: 10px;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 25px;
+            border-radius: 15px;
             box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+            max-width: 600px;
+        }
+
+        .crumbled-info p {
+            font-size: 18px;
+            line-height: 1.6;
         }
 
         .cookie {
@@ -66,10 +77,34 @@
         .counter {
             font-size: 24px;
             margin-top: 20px;
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.95);
             border-radius: 8px;
-            padding: 10px 20px;
+            padding: 15px 25px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .home-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            padding: 10px 20px;
+            font-size: 18px;
+            background-color: #d8996a;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .home-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.4);
+        }
+
+        .home-button:active {
+            transform: scale(0.95);
         }
     </style>
 </head>
@@ -77,13 +112,16 @@
     <div class="starter-page active" id="starterPage">
         <div class="crumbled-info">
             <h1>🍪 Welcome to Totally_Bad's Cookie Clicker! 🍪</h1>
-            <p>Click the cookie to contribute to your personal cookie count!</p>
-            <p>Cookies are stored locally, so you can reload anytime and keep your progress!</p>
+            <p>In this game, you contribute to your personal cookie empire!</p>
+            <p>Click the big cookie as many times as you can to grow your collection.</p>
+            <p>Cookies are saved locally, so come back anytime to see how far you've gotten.</p>
+            <p>Are you ready to become the ultimate cookie-clicking master?</p>
         </div>
         <button class="crumbled-button" id="startButton">Start Clicking</button>
     </div>
 
     <div class="game-page" id="gamePage">
+        <button class="home-button" id="homeButton">Home</button>
         <div class="cookie" id="cookie">🍪</div>
         <div class="counter" id="counter">Loading cookies...</div>
     </div>
@@ -92,6 +130,7 @@
         const starterPage = document.getElementById('starterPage');
         const gamePage = document.getElementById('gamePage');
         const startButton = document.getElementById('startButton');
+        const homeButton = document.getElementById('homeButton');
         const cookieElement = document.getElementById('cookie');
         const counterElement = document.getElementById('counter');
 
@@ -104,6 +143,11 @@
         startButton.addEventListener('click', () => {
             starterPage.classList.remove('active');
             gamePage.classList.add('active');
+        });
+
+        homeButton.addEventListener('click', () => {
+            gamePage.classList.remove('active');
+            starterPage.classList.add('active');
         });
 
         cookieElement.addEventListener('click', () => {
