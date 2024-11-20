@@ -1,1 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Local Cookie Clicker</title>
+    <link rel="icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABHUlEQVR42mNgGAUUAxcACXXNZ2QUJjbG8TDMywVCOb4Io7lOGoMgNnAWLJ+QcBb+JoEkWbCaSz+CoclgRIjbIwEDbfYEZGAXZzMPwOqGFN/BoykMDAxlgBOhRUjNoYRIyxP0BscmmBGkm8hoKJsRkRIlyYZMEiCZsRgE7jEaBEuLYAWMF2QBhnD8DQML5gCZnAwNgTTxBFjNBGgMyRTYJZGMxBjxMSkAAmMDeUayDUzIQZUMDLFOLIjDBHkNQmWNUAbAZcBRhNhs3MOXMrBMF4AzEKyQmQQ8U3IAgLOgTYxKkKnMFGDNEJYnUYgERlTEYM2AacEAK8Pjo9Odp02AAAAAElFTkSuQmCC">
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #fce4d6;
+            font-family: Arial, sans-serif;
+        }
 
+        .cookie {
+            font-size: 150px;
+            cursor: pointer;
+            transition: transform 0.1s ease;
+        }
+
+        .cookie:active {
+            transform: scale(0.95);
+        }
+
+        .counter {
+            font-size: 24px;
+            margin-top: 20px;
+            background: #fff;
+            border-radius: 8px;
+            padding: 10px 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <div class="cookie" id="cookie">🍪</div>
+    <div class="counter" id="counter">Loading cookies...</div>
+
+    <script>
+        const cookieElement = document.getElementById('cookie');
+        const counterElement = document.getElementById('counter');
+
+        let localCookies = parseInt(localStorage.getItem('localCookies')) || 0;
+
+        function updateCounter() {
+            counterElement.textContent = `Cookies: ${localCookies}`;
+        }
+
+        cookieElement.addEventListener('click', () => {
+            localCookies++;
+            localStorage.setItem('localCookies', localCookies);
+            updateCounter();
+        });
+
+        updateCounter();
+    </script>
+</body>
+</html>
